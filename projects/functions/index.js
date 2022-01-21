@@ -59,7 +59,7 @@ function returnFnResult(fn) {
    console.log(f()); // выведет 13
  */
 
-let returnCounter (number = 0) => {
+let returnCounter = (number = 0) => {
   return function () {
     return number++;
   };
@@ -105,10 +105,18 @@ function returnArgumentsArray(...arr) {
 //        return a + b;
 //      }
 
+//Apply 
 function bindFunction(sum, ...args) {
   return function () {
-    return sum.bind(null, args);
+    return sum.apply(null, args);
   };
+}
+
+//Bind
+function bindFunction(sum, a, b) {
+  return function() {
+    return sum.bind(null, a, b)()
+  }
 }
 
 export {

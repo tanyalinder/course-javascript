@@ -113,11 +113,10 @@ function bindFunction(sum, ...args) {
 }
 
 //Bind
-function bindFunction(sum, a, b) {
-  return function() {
-    return sum.bind(null, a, b)()
-  }
+function bindFunction(sum, ...args) {
+  return sum.bind(null, ...args)
 }
+
 
 export {
   returnFirstArgument,

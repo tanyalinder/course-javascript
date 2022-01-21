@@ -58,11 +58,13 @@ function returnFnResult(fn) {
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number = 0) {
+
+let returnCounter (number = 0) => {
   return function () {
     return number++;
   };
-}
+} 
+
 
 /*
  Задание 5 *:
@@ -105,7 +107,7 @@ function returnArgumentsArray(...arr) {
 
 function bindFunction(sum, ...args) {
   return function () {
-    return sum.apply(null, args);
+    return sum.bind(null, args);
   };
 }
 

@@ -108,3 +108,19 @@ describe('ДЗ 1 - функции', () => {
     });
   });
 });
+
+
+
+
+let arr = [1, 2, 3]
+
+
+arr.forEach(function(a) {
+ console.log(a);
+})
+
+function tipaForE(arr) {
+  for (let i = 0; i<arr.length; i++){
+    console.log(arr[i]);
+  }
+}

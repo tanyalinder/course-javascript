@@ -11,7 +11,7 @@
  */
 function forEach(array, fn) {
   for (let i = 0; i<array.lenght; i++) {
-    fn(array[i])
+    fn(array[i], i, array)
   }
   
 }
@@ -30,8 +30,9 @@ forEach([1, 2, 3], (el) => console.log(el))
 function map(array, fn) {
   let arr = [];
   for (let i = 0; i<array.lenght; i++) {
-    arr.push(fn(array[i]))
+    arr.push(fn(array[i], i, array))
   }
+  return arr;
 }
 map([1, 2, 3], (el) => el ** 2)
 
@@ -48,7 +49,7 @@ map([1, 2, 3], (el) => el ** 2)
 function reduce(array, fn, initial=0) {
   let res = 0
   for(let i=0; i<arr.length; i++) {
-     res += fun(initial, arr[i])
+     res += fn(initial, arr[i], i, array)
   }
   return res
 }

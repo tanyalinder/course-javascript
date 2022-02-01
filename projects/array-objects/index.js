@@ -46,13 +46,14 @@ map([1, 2, 3], (el) => el ** 2)
    reduce([1, 2, 3], (all, current) => all + current) // 6
  */
 
-function reduce(array, fn, initial=0) {
-  let res = 0
-  for(let i=0; i<arr.length; i++) {
-     res += fn(initial, arr[i], i, array)
+   function reduce(array, fn, initial) {
+    let hasInitial = typeof initial !== 'undefined';
+    let prev = initial || array[0];
+    for(let i=hasInitial ? 0 : 1; i<array.length; i++) {
+      prev = fn(prev, array[i], i, array)
+    }
+    return prev
   }
-  return res
-}
 /*
  Задание 4:
 

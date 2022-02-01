@@ -111,7 +111,41 @@ function returnBadArguments(fn, ...args) {
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
 function calculator(number = 0) {
+  if (!isFinite(number)) {
+    throw new Error('number is not a number');
+  }
+  let obj = {
+    sum: function (...rest) {
+      for (let i = 0; i < rest.length; i++) {
+        number += rest[i]
+      }
+      return number
+    },
+    dif: function (...rest) {
+      for (let i = 0; i < rest.length; i++) {
+        number -= rest[i]
+      }
+      return number
+    },
+    div: function (...rest) {
+      for (let i = 0; i < rest.length; i++) {
+        if(rest[i] == 0) {
+          throw new Error('division by 0');
+        }
+        number /= rest[i]
+      }
+      return number
+    },
+    mul: function (...rest) {
+      for (let i = 0; i < rest.length; i++) {
+        number *= rest[i]
+      }
+      return number
+    },
+  }
+  return obj
 }
+
 
 /* При решении задач, постарайтесь использовать отладчик */
 

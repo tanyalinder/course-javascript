@@ -18,28 +18,18 @@
  */
 
 function isAllTrue(array, fn) {
-    try {
         if (array.length==0 || !Array.isArray(array)) {
           throw new Error("empty array");
         }
         if (typeof fn != 'function') {
           throw new Error("fn is not a function");
         }
-        let check = false;
         for (let i = 0; i<array.length; i++) {
-          check = fn(array[i]);
-          if (!check) {
+          if (!fn(array[i])) {
             return false;
-          }
-          else if (check){
-            check = true
-          }
+          }    
         }
-        return check
-  }
-  catch (e){
-    console.log(e);
-  }
+        return true
 }
 
 
@@ -62,25 +52,19 @@ function isAllTrue(array, fn) {
    isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
  */
 function isSomeTrue(array, fn) {
-  try {
+  
       if (array.length==0 || !Array.isArray(array)) {
         throw new Error("empty array");
       }
       if (typeof fn != 'function') {
         throw new Error("fn is not a function");
       }
-      let check = false;
       for (let i = 0; i<array.length; i++) {
-        check = fn(array[i]);
-        if (check) {
+        if (fn(array[i])) {
           return true;
         }
       }
-      return check
-}
-catch (e){
-  console.log(e);
-}
+      return false
 }
 
 /*
@@ -106,6 +90,7 @@ function returnBadArguments(fn, ...args) {
       mas.push(fn(args[i]))
     }
   }
+  return mas;
 }
 
 /*

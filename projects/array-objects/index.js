@@ -70,6 +70,9 @@ function upperProps(obj) {
   return arr
 }
 
+
+
+
 /*
  Задание 5 *:
 

@@ -33,20 +33,115 @@ import './cookie.html';
    const newDiv = document.createElement('div');
    homeworkContainer.appendChild(newDiv);
  */
-const homeworkContainer = document.querySelector('#app');
-// текстовое поле для фильтрации cookie
-const filterNameInput = homeworkContainer.querySelector('#filter-name-input');
-// текстовое поле с именем cookie
-const addNameInput = homeworkContainer.querySelector('#add-name-input');
-// текстовое поле со значением cookie
-const addValueInput = homeworkContainer.querySelector('#add-value-input');
-// кнопка "добавить cookie"
-const addButton = homeworkContainer.querySelector('#add-button');
-// таблица со списком cookie
-const listTable = homeworkContainer.querySelector('#list-table tbody');
+   let homeworkContainer = document.querySelector('#app');
 
-filterNameInput.addEventListener('input', function () {});
-
-addButton.addEventListener('click', () => {});
-
-listTable.addEventListener('click', (e) => {});
+   let filterNameInput = homeworkContainer.querySelector('#filter-name-input');
+  
+   let addNameInput = homeworkContainer.querySelector('#add-name-input');
+   
+   let addValueInput = homeworkContainer.querySelector('#add-value-input');
+  
+   let addButton = homeworkContainer.querySelector('#add-button');
+  
+   let listTable = homeworkContainer.querySelector('#list-table tbody');
+   
+   filterNameInput.addEventListener('input', function () {
+    listTable.innerHTML = ''
+    if (filterNameInput.value !== '') {
+      let cookie = getCookie();
+      for (const key in cookie) {
+        
+        const value = cookie[key];
+        if(key) {
+          if (value.indexOf(filterNameInput.value) != -1 || key.indexOf(filterNameInput.value) != -1) {
+            
+            let newRow = listTable.insertRow();
+            newCell = newRow.insertCell(-1);
+            newCell.textContent = key;
+      
+            newCell = newRow.insertCell(-1);
+            newCell.textContent = cookie[key];
+      
+            newCell = newRow.insertCell(-1);
+            let button = document.createElement('button');
+            button.textContent = 'Удалить'
+            newCell.append(button)
+      
+            deleteCookie(button, newRow)     
+          }
+      }
+      
+      }
+      
+  
+  } else {
+  
+    insertCookie()
+   
+    }
+  });
+  
+  
+  
+  
+  addButton.addEventListener('click', () => {
+      let newCoookie = addNameInput.value+'='+addValueInput.value;
+      document.cookie = newCoookie;
+  
+      let newRow = listTable.insertRow();
+      newCell = newRow.insertCell(-1);
+      newCell.textContent = addNameInput.value;
+  
+      newCell = newRow.insertCell(-1);
+      newCell.textContent = addValueInput.value;
+  
+      newCell = newRow.insertCell(-1);
+      let button = document.createElement('button');
+      button.textContent = 'Удалить'
+      newCell.append(button)
+  
+      deleteCookie(button, newRow)
+  
+  });
+  
+  
+  function insertCookie() {
+      let cookie = getCookie()
+      let newCell;
+      for (const key in cookie) {
+    
+          const value = cookie[key];
+        
+          let newRow = listTable.insertRow();
+          newCell = newRow.insertCell(-1);
+          newCell.textContent = key;
+    
+          newCell = newRow.insertCell(-1);
+          newCell.textContent = cookie[key];
+    
+          newCell = newRow.insertCell(-1);
+          let button = document.createElement('button');
+          button.textContent = 'Удалить'
+          newCell.append(button)
+    
+          deleteCookie(button, newRow)
+    }
+  }
+  
+  function deleteCookie(button, row) {
+    button.addEventListener('click', (e) => {
+      let currentCookie = e.target.parentNode.parentNode.firstChild.textContent;
+      document.cookie = currentCookie +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+      row.remove()
+    });  
+  }
+  
+  function getCookie() {
+    return document.cookie.split('; ').reduce((prev, current) => {
+      const [name, value] = current.split('=');
+      prev[name] = value;
+      return prev;
+   }, {});
+  }
+  insertCookie()
+  

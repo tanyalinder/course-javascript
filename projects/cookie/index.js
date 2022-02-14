@@ -56,6 +56,7 @@ import './cookie.html';
           if (value.indexOf(filterNameInput.value) != -1 || key.indexOf(filterNameInput.value) != -1) {
             
             let newRow = listTable.insertRow();
+            let newCell;
             newCell = newRow.insertCell(-1);
             newCell.textContent = key;
       
@@ -85,6 +86,7 @@ import './cookie.html';
   
   
   addButton.addEventListener('click', () => {
+      let newCell;
       let newCoookie = addNameInput.value+'='+addValueInput.value;
       document.cookie = newCoookie;
   

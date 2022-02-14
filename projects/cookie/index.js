@@ -67,7 +67,7 @@ import './cookie.html';
             let button = document.createElement('button');
             button.textContent = 'Удалить'
             newCell.append(button)
-      
+
             deleteCookie(button, newRow)     
           }
       }

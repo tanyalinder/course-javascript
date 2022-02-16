@@ -90,19 +90,28 @@ filterNameInput.addEventListener('input', function () {
    else if (addNameInput.value.indexOf(filterNameInput.value) != -1 || addValueInput.value.indexOf(filterNameInput.value) != -1) {
    let newCoookie = addNameInput.value+'='+addValueInput.value;
    document.cookie = newCoookie;
-   let newCell;
-   let newRow = listTable.insertRow();
-   newCell = newRow.insertCell(-1);
-   newCell.textContent = addNameInput.value;
+   
+ 
+     if(searchInTable(addNameInput.value)){
+       let tr = searchInTable(addNameInput.value);
+       tr.children[1].textContent = addValueInput.value;
+     } else {
+       let newCell;
+       let newRow = listTable.insertRow();
+       newCell = newRow.insertCell(-1);
+       newCell.textContent = addNameInput.value;
+   
+       newCell = newRow.insertCell(-1);
+       newCell.textContent = addValueInput.value;
+   
+       newCell = newRow.insertCell(-1);
+       let button = document.createElement('button');
+       button.textContent = 'Удалить'
+       newCell.append(button)
+       deleteCookie(button, newRow)
+     }
+   
 
-   newCell = newRow.insertCell(-1);
-   newCell.textContent = addValueInput.value;
-
-   newCell = newRow.insertCell(-1);
-   let button = document.createElement('button');
-   button.textContent = 'Удалить'
-   newCell.append(button)
-   deleteCookie(button, newRow)
  }
 
 
@@ -172,4 +181,16 @@ function deleteCookieInTableByName(cookieName) {
  } 
 }
 
+function searchInTable(cookieName) {
+ let trs =  listTable.children;
+ for (let i = 0; i < trs.length; i++) {
+   const tr = trs[i];
+   if(tr.firstChild.textContent == cookieName) {
+     return tr
+   }    
+ } 
+}
+
 insertCookie()
+
+

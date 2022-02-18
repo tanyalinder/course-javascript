@@ -38,6 +38,7 @@ let addButton = homeworkContainer.querySelector('#add-button');
 let listTable = homeworkContainer.querySelector('#list-table tbody');
 
 filterNameInput.addEventListener('input', function () {
+let newCell
  listTable.innerHTML = ''
  if (filterNameInput.value !== '') {
    let cookie = getCookie();
